@@ -47,14 +47,13 @@ var HTMLschoolName = '<a href="#">%data%';
 var HTMLschoolDegree = ' -- %data%</a>';
 var HTMLschoolDates = '<div class="date-text">%data%</div>';
 var HTMLschoolLocation = '<div class="location-text">%data%</div>';
-var HTMLschoolMajor = '<em><br>Major: %data%</em>';
+var HTMLschoolMajor = '<em><br>Major(s): %data%</em>';
 
 var HTMLonlineClasses = '<h3>Online Classes</h3>';
 var HTMLonlineTitle = '<a href="#">%data%';
 var HTMLonlineSchool = ' - %data%</a>';
 var HTMLonlineDates = '<div class="date-text">%data%</div>';
-//var HTMLonlineURL = '<br><a href="#">%data%</a>';
-var HTMLonlineLicence = '<br>%data%';
+var HTMLonlineURL = '<br><a href="#">%data%</a>';
 
 
 var internationalizeButton = '<button>Internationalize</button>';
@@ -153,7 +152,7 @@ function initializeMap() {
     // The next lines save location data from the search result object to local variables
     var lat = placeData.geometry.location.lat();  // latitude from the place service
     var lon = placeData.geometry.location.lng();  // longitude from the place service
-    var name = placeData.formatted_address;   // name of the place from the place service
+    var name = placeData.formatted_address; // name of the place from the place service
     var bounds = window.mapBounds;            // current boundaries of the map window
 
     // marker is an object with additional data about the pin for a single location
@@ -173,8 +172,26 @@ function initializeMap() {
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      var popupText = '';
+      if(bio.contacts.location === name){
+        popupText += "Current residence: " + bio.contacts.location;
+      }
+      for (var job in work.jobs) {
+        if(work.jobs[job].location === name){
+          if(popupText.length>0)
+            popupText += "<br/>";
+          popupText += work.jobs[job].title + " @ " + work.jobs[job].employer;
+        }
+      }
+      for (var school in education.schools) {
+        if(education.schools[school].location === name){
+          if(popupText.length>0)
+            popupText += "<br/>";
+          popupText += "Attended " + education.schools[school].name;
+        }
+      }
       var infoWindow = new google.maps.InfoWindow({
-        content: name
+        content: popupText
       });
       infoWindow.open(map, marker);
     });

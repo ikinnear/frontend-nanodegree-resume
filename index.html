@@ -42,6 +42,9 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   <!-- More on helper.js in the class -->
   <script src="js/helper.js"></script>
 
+  <script src="js/springy.js"></script>
+  <script src="js/springyui.js"></script>
+
   <!--
   Uncomment the <script> tag below when you're ready to add an interactive
   Google Map to your resume!
@@ -66,6 +69,10 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     <div style="clear: both;"></div>
     <div id="workExperience" class="gray">
       <h2>Work Experience</h2>
+    </div>
+    <div id="workSkills" class="gray">
+      <h2>Work Skills Matrix</h2>
+      <canvas id="my_canvas" width="1000" height="800" /><script></script>
     </div>
     <div id="projects">
       <h2>Projects</h2>
@@ -122,6 +129,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     }
     if(document.getElementsByClassName('work-entry').length === 0) {
       document.getElementById('workExperience').style.backgroundColor = '#000000';
+      document.getElementById('workSkills').style.backgroundColor = '#000000';
     }
     if(document.getElementsByClassName('project-entry').length === 0) {
       document.getElementById('projects').style.backgroundColor = '#000000';
@@ -136,5 +144,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
       document.getElementById('map-div').style.backgroundColor = '#000000';
     }
   </script>
+
 </body>
 </html>

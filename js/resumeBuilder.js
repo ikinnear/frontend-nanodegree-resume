@@ -233,37 +233,20 @@ var projects = {
 };
 projects.display();
 
-// make a new graph
+// make a new work skills matrix graph
 var graph = new Springy.Graph();
-
-// make some nodes
 var node = [];
 for (var job in work.jobs) {
-	//var a = 1;
-	//var name = 'a';
-	//document.write(eval(name)); // 1
-	//var a = job;
-	//var name = 'job';
-	//myvar = "name_" + eval(name);
-	//console.log("IK: " + myvar); 
 	var myvar =  graph.newNode({label: work.jobs[job].dates});
 	for (var skill in work.jobs[job].skills) {
 		var myvar2 = graph.newNode({label: work.jobs[job].skills[skill]});
 		graph.newEdge(myvar, myvar2);
 	}
 }
-
-//function inName(name){
-//	var name = name.trim().split(" ");
-//	console.log(name);
-//	name[1] = name[1].toUpperCase();
-//	name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
-//	return name[0] + " " + name[1];
-//}
-//$('#main').append(internationalizeButton);
+$("#my_canvas").springy({ graph: graph });
 
 $("#map-div").append(googleMap);
-$("#my_canvas").springy({ graph: graph });
+
 
 
 

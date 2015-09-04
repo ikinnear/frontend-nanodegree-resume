@@ -50,7 +50,7 @@ var education = {
 				"Political Science"
 			],
 			"degree": "BA",
-			"dates": "1994",
+			"dates": 1994,
 			"url": "https://uwaterloo.ca/"
 		}
 	],
@@ -58,42 +58,42 @@ var education = {
 		{
 			"title": "Frontend Developer NanoDegree",
 			"school": "Udacity",
-			"date": "December 2015",
+			"date": 2015,
 			"url": "https://www.udacity.com/course/front-end-web-developer-nanodegree--nd001",
 			"licence": "[in progress]"
 		},
 		{
 			"title": "Certified Implementation Specialist",
 			"school": "ServiceNow",
-			"date": "February 2014",
+			"date": 2014,
 			"url": "http://www.servicenow.com/services/training-and-certification.html",
 			"licence": "0100474"
 		},
 		{
 			"title": "Certified ScrumMaster",
 			"school": "Scrum Alliance",
-			"date": "May 2012",
+			"date": 2012,
 			"url": "https://www.scrumalliance.org/certifications/practitioners/certified-scrummaster-csm",
 			"licence": "000190865"
 		},
 		{
 			"title": "ITIL v3 Foundations",
 			"school": "Hewlett Packard",
-			"date": "March 2010",
+			"date": 2010,
 			"url": "http://www8.hp.com/us/en/training/portfolio/itil.html",
 			"licence": "870891"
 		},
 		{
 			"title": "Mysql Database Administrator",
 			"school": "Oracle",
-			"date": "April 2010",
+			"date": 2010,
 			"url": "https://education.oracle.com/",
 			"licence": "SUN656816"
 		},
 		{
 			"title": "Management 3.0",
 			"school": "Happy Melly",
-			"date": "October 2013",
+			"date": 2013,
 			"url": "https://management30.com/",
 			"licence": "1310343"
 		}
@@ -125,7 +125,7 @@ var education = {
 			$("#education").append(HTMLschoolStart);
 			var formattedOnlineTitle = HTMLonlineTitle.replace('%data%',education.onlineCourses[course].title);
 			var formattedOnlineSchool = HTMLonlineSchool.replace('%data%',education.onlineCourses[course].school);
-			var formattedOnlineDates = HTMLonlineDates.replace('%data%',education.onlineCourses[course].date + " - " + 'Licence: ' + education.onlineCourses[course].licence);
+			var formattedOnlineDates = HTMLonlineDates.replace('%data%',education.onlineCourses[course].date + " | " + 'Licence: ' + education.onlineCourses[course].licence);
 			var formattedOnlineURL = HTMLonlineURL.replace('%data%',education.onlineCourses[course].url);
 			$(".education-entry:last").append(formattedOnlineTitle + formattedOnlineSchool);
 			$(".education-entry:last").append(formattedOnlineDates);
@@ -212,15 +212,19 @@ var projects = {
 	"NanoDegree" : [
 		{
 			"title": "About me",
-			"description": "(Udacity NanoDegree) About Me - Responsive Design",
 			"dates": "July 2015",
-			"image": "http://ikinnear.github.io/images/project1_fw2.jpg"
+			"description": "(Udacity NanoDegree) About Me - Responsive Design",
+			"images": [
+				"http://ikinnear.github.io/images/project1_fw2.jpg",
+			]
 		},
 		{
 			"title": "Resume",
-			"description": "(Udacity NanoDegree) My Online Resume, built with jQuery/scripting",
 			"dates": "August 2015",
-			"image": "http://ikinnear.github.io/images/project1_fw1.jpg"
+			"description": "(Udacity NanoDegree) My Online Resume, built with jQuery/scripting",
+			"images": [
+				"http://ikinnear.github.io/images/project1_fw1.jpg",
+			]
 		}
 	],
 	display : display = function(){
@@ -228,12 +232,14 @@ var projects = {
 			$("#projects").append(HTMLprojectStart);
 			var formattedProjectTitle = HTMLprojectTitle.replace('%data%',projects.NanoDegree[project].title);
 			var formattedProjectDates = HTMLprojectDates.replace('%data%',projects.NanoDegree[project].dates);
-			var formattedProjectImage = HTMLprojectImage.replace('%data%',projects.NanoDegree[project].image);
 			var formattedProjectDescription = HTMLprojectDescription.replace('%data%',projects.NanoDegree[project].description);
 			$(".project-entry:last").append(formattedProjectTitle);
 			$(".project-entry:last").append(formattedProjectDates);
 			$(".project-entry:last").append(formattedProjectDescription);
-			$(".project-entry:last").append(formattedProjectImage);
+			for(image in projects.NanoDegree[project].images){
+				var formattedProjectImage = HTMLprojectImage.replace('%data%',projects.NanoDegree[project].images[image]);
+				$(".project-entry:last").append(formattedProjectImage);
+			}
 		}
 	}
 };

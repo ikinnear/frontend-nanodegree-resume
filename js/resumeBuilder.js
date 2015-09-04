@@ -41,8 +41,6 @@ var bio = {
 		$("#footerContacts").append(formattedLocation);
 	}
 };
-bio.display();
-
 var education = {
 	"schools" : [
 		{
@@ -135,8 +133,6 @@ var education = {
 		}
 	}
 };
-education.display();
-
 var work = {
 	"jobs" : [
 		{ 
@@ -198,10 +194,20 @@ var work = {
 			$(".work-entry:last").append(formattedWorkLocation);
 			$(".work-entry:last").append(formattedWorkDescription);
 		}
+		// make a new work skills matrix graph
+		var graph = new Springy.Graph();
+		var node = [];
+		for (var job in work.jobs) {
+			var myvar =  graph.newNode({label: work.jobs[job].dates});
+			for (var skill in work.jobs[job].skills) {
+				var myvar2 = graph.newNode({label: work.jobs[job].skills[skill]});
+				graph.newEdge(myvar, myvar2);
+			}
+		}
+		$("#my_canvas").springy({ graph: graph });
+		$("#map-div").append(googleMap);
 	}
 };
-work.display();
-
 var projects = {
 	"NanoDegree" : [
 		{
@@ -231,26 +237,12 @@ var projects = {
 		}
 	}
 };
+
+
+bio.display();
+education.display();
+work.display();
 projects.display();
-
-// make a new work skills matrix graph
-var graph = new Springy.Graph();
-var node = [];
-for (var job in work.jobs) {
-	var myvar =  graph.newNode({label: work.jobs[job].dates});
-	for (var skill in work.jobs[job].skills) {
-		var myvar2 = graph.newNode({label: work.jobs[job].skills[skill]});
-		graph.newEdge(myvar, myvar2);
-	}
-}
-$("#my_canvas").springy({ graph: graph });
-
-$("#map-div").append(googleMap);
-
-
-
-
-
 
 
 
